@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div>
+      <p id="aviso">Por favor digite um número:</p>
+      <input id="numero" type="number" value="0">
+      <button id="avaliarNumero" type="button">Avaliar Número</button>
+      <p id="par"></p>
+      <p id="impar"></p>
+      <p id="dez"></p>
+      <p id="dobro"></p>
+      <p id="primo"></p>
+    </div>
+      <script>
+      function limparCampos() {
+        document.getElementById('par').innerHTML = "";
+        document.getElementById('impar').innerHTML = "";
+        document.getElementById('dez').innerHTML = "";
+        document.getElementById('dobro').innerHTML = "";
+        document.getElementById('primo').innerHTML = "";
+      }
+
+      function parOuImpar(numero) {
+        if (numero % 2 === 0) {
+          document.getElementById('par').innerHTML = "é par";
+          document.getElementById('impar').innerHTML = "não é ímpar";
+        }
+        else {
+          document.getElementById('par').innerHTML = "não é par";
+          document.getElementById('impar').innerHTML = "é ímpar";
+        }
+      }
+
+      function numeroPrimo(numero) {
+        if (numero < 2) {
+          return false;
+        }
+        if (numero != Math.round(numero)){
+          return false;
+        }
+        var primo = true;
+          for (var i = 2; i <= Math.sqrt(numero); i ++) {
+            if (numero % i == 0) {
+            primo = false;
+            }
+          }
+          return primo;
+      }
+
+      function mostrarPrimo(numero){
+        if (numeroPrimo(numero) == false) {
+          document.getElementById('primo').innerHTML = "não é primo";
+        }
+        else {
+          document.getElementById('primo').innerHTML = "é primo";
+        }
+      }
+
+      function verificarDez(numero) {
+        if (numero > 10) {
+          document.getElementById('dez').innerHTML = "é maior que 10";
+        }
+        else {
+          document.getElementById('dez').innerHTML = "não é maior que 10";
+        }
+      }
+
+      function mostrarDobro(numero) {
+        var dobro = numero * 2;
+        document.getElementById('dobro').innerHTML = "o dobro de " + numero + " é " + dobro;
+      }
+
+      var buttonAvaliarNumero = document.getElementById('avaliarNumero');
+      buttonAvaliarNumero.addEventListener('click', function() {
+        var numero = document.getElementById('numero').value;
+        console.log(numero);
+        if (numero === null || numero === undefined || numero == "" || numero <= 0){
+          document.getElementById('aviso').innerHTML = "Por favor digite um número maior que zero:";
+          limparCampos();
+        }
+        else {
+          document.getElementById('aviso').innerHTML = "Por favor digite um número:";
+          parOuImpar(numero);
+          mostrarPrimo(numero);
+          verificarDez(numero);
+          mostrarDobro(numero);
+        }
+      });
+    </script>
+  </body>
+</html>
